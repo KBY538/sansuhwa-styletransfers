@@ -1,4 +1,4 @@
 # models
-
+/model weights
 *.pth
 *.pt

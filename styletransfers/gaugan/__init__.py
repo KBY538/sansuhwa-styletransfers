@@ -1,0 +1,1 @@
+from .spade_generate import generate_image

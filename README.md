@@ -2,7 +2,8 @@
 산수화를 만드는 SPADE, MUNIT, CycleGAN, NST, AdaIN
 
 # Demo interface
-usage: python paint.py  
+usage: `python paint.py`  
+> GUI
 <img width="100%" src="https://user-images.githubusercontent.com/80605197/187375746-fd0faa04-7dc4-46fe-be03-977ea6dde898.PNG"/>
 
 # Models

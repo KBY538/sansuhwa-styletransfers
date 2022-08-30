@@ -27,6 +27,7 @@ def distance(x1, x2):
 def label_maker(img):
     label = np.zeros((256, 256))
     img = cv2.resize(img, (256, 256), cv2.INTER_NEAREST)
+    idx = 0
 
     values, _ = np.unique(img.reshape((-1, 3)), axis=0, return_counts=True)
     curr_colors = [c for c in values.tolist() if c in colors.values()]
@@ -51,8 +52,20 @@ def label_maker(img):
     return label
 
 def generate_image(filepath, checkpoint_num, save_path="./result/", checkpoint_dir=checkpoint_dir):
-    img = cv2.imread(filepath)
-    name = os.path.basename(filepath).split('.')[0]+'_{}'.format(checkpoint_num)
+
+    if type(filepath) == str:
+        img = cv2.imread(filepath)
+        name = os.path.basename(filepath).split('.')[0]+'_{}'.format(checkpoint_num)
+
+    elif type(filepath) != np.ndarray:
+        img = np.array(filepath)
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        name = "templabel_{}".format(checkpoint_num)
+
+    else:
+        img = filepath
+        name = "templabel_{}".format(checkpoint_num)
+
     label = label_maker(img)
     checkpoint_dir = os.path.join(checkpoint_dir, checkpoint_num)
     return evaluate(label, name, save_path, checkpoint_dir)
